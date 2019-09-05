@@ -3,7 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-
+use Cocur\Slugify\Slugify;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\PropertyRepository")
  */
@@ -103,6 +103,12 @@ class Property
         return $this->title;
     }
 
+    public function getSlug(): string
+    {
+        $slugify = new Slugify();
+        return $slugify->slugify($this->title); // hello-world
+    }
+
     public function setTitle(string $title): self
     {
         $this->title = $title;
@@ -180,6 +186,11 @@ class Property
         $this->price = $price;
 
         return $this;
+    }
+
+    public function getFormattedPrice(): string
+    {
+        return number_format($this->price, 0, '', ' ');
     }
 
     public function getHeat(): ?int
