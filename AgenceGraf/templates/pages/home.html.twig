@@ -1,5 +1,7 @@
 {% extends "base.html.twig" %}
 
+{% block title 'Agence Les Cougoussolles' %}
+
 {% block body %}
 <div class="jumbotron text-center">
     <h1>Agence des Cougoussolles</h1>
@@ -8,7 +10,7 @@
 
 <div class="container">
     <h2>Les derniers biens</h2>
-    <div class="row flex"></div>
+    <div class="row flex">
         {% for property in properties %}
         <div class="col-3">
             <div class="card">
@@ -22,7 +24,7 @@
                 </div>
             </div>
         </div>
-    
-        {% endfor %}
+       {% endfor %}
     </div>
+</div>
 {% endblock %}
