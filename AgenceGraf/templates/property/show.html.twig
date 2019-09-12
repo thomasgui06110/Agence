@@ -9,12 +9,37 @@
     <div class="container">
         <div class="row">
             <div class="col-md-8">
+                {% if property.filename %}
+                <a href="{{ path('property.show', {slug: property.slug, id: property.id}) }}">
+                    <img src='/images/properties/{{ property.filename }}' class="card-img-top" style="width: 75%; height: auto;" alt=" {{ property.title }}">
+                </a>
+                {% else %}
+                <a href="{{ path('property.show', {slug: property.slug, id: property.id}) }}">
+                    <img src='/images/properties/empty.jpg' class="card-img-top" style="width: 75%; height: auto;" alt=" {{ property.title }}">
+                </a>
+                {% endif %}
             </div>
             <div class="col-md-4">
                 <h1>{{ property.title }}</h1>
                 <h2>{{ property.rooms }} pièces - {{ property.surface }} m²</h2>
                 <div class="text-primary" style="font-size:4rem; font-weight: bold;">{{ property.formattedPrice }} €</div>
                 <a href="#" class="btn btn-primary">Contacter l'agence</a>
+                <div class="mt-4" id="contactForm">
+                    {{ form_start(form) }}
+                    <div class="row">
+                        <div class="col">{{ form_row(form.firstname) }}</div>
+                        <div class="col">{{ form_row(form.lastname) }}</div>
+                    </div>
+                    <div class="row">
+                        <div class="col">{{ form_row(form.phone) }}</div>
+                        <div class="col">{{ form_row(form.email) }}</div>
+                    </div>
+                    {{ form_rest(form) }}
+                    <div class="form-group">
+                        <button class="btn btn-primary">Envoyer !</button>
+                    </div>
+                    {{ form_end(form) }}
+                </div>
             </div>
         </div>
     </div>
@@ -51,7 +76,11 @@
             </div>
             <div class="col-md-4">
                 <h2>Spécificités</h2>
-
+                    <ul class="list-group">
+                        {% for option in property.options %}
+                            <li class="list-group-item">{{ option.name }}</li>
+                        {% endfor %}
+                    </ul>
             </div>
         </div>
     </div>

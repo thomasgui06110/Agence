@@ -1,4 +1,13 @@
 <div class="card mb-4">
+    {% if property.filename %}
+    <a href="{{ path('property.show', {slug: property.slug, id: property.id}) }}">
+        <img src='/images/properties/{{ property.filename }}' class="card-img-top" style="width: 100%; height: auto;" alt=" {{ property.title }}">
+    </a>
+    {% else %}
+    <a href="{{ path('property.show', {slug: property.slug, id: property.id}) }}">
+        <img src='/images/properties/empty.jpg' class="card-img-top" style="width: 100%; height: auto;" alt=" {{ property.title }}">
+    </a>
+    {% endif %}
     <div class="card-body">
         
         <h5 class="card-title">
